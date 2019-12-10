@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.board = new System.Windows.Forms.Panel();
-            this.paddle = new System.Windows.Forms.PictureBox();
             this.ball = new System.Windows.Forms.PictureBox();
+            this.paddle = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.board.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.paddle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ball)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paddle)).BeginInit();
             this.SuspendLayout();
             // 
             // board
@@ -49,15 +49,6 @@
             this.board.TabIndex = 0;
             this.board.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Board_PreviewKeyDown);
             // 
-            // paddle
-            // 
-            this.paddle.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.paddle.Location = new System.Drawing.Point(257, 385);
-            this.paddle.Name = "paddle";
-            this.paddle.Size = new System.Drawing.Size(140, 20);
-            this.paddle.TabIndex = 0;
-            this.paddle.TabStop = false;
-            // 
             // ball
             // 
             this.ball.BackColor = System.Drawing.Color.Red;
@@ -66,6 +57,15 @@
             this.ball.Size = new System.Drawing.Size(20, 20);
             this.ball.TabIndex = 1;
             this.ball.TabStop = false;
+            // 
+            // paddle
+            // 
+            this.paddle.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.paddle.Location = new System.Drawing.Point(257, 385);
+            this.paddle.Name = "paddle";
+            this.paddle.Size = new System.Drawing.Size(140, 20);
+            this.paddle.TabIndex = 0;
+            this.paddle.TabStop = false;
             // 
             // timer1
             // 
@@ -81,8 +81,8 @@
             this.Text = "Bricky Breaky";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.board.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.paddle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ball)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paddle)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -90,9 +90,9 @@
         #endregion
 
         private System.Windows.Forms.Panel board;
-        private System.Windows.Forms.PictureBox ball;
         private System.Windows.Forms.PictureBox paddle;
         private System.Windows.Forms.Timer timer1;
+        public System.Windows.Forms.PictureBox ball;
     }
 }
 

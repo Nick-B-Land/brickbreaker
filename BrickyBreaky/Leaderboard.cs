@@ -50,5 +50,12 @@ namespace BrickyBreaky
                 }
             }
         }
+
+        private void backToMainButton_Click(object sender, EventArgs e)
+        {
+            Startscreen s = new Startscreen();
+            s.Show();
+            this.Close();
+        }
     }
 }

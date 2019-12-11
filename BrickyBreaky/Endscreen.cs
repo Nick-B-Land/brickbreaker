@@ -59,6 +59,7 @@ namespace BrickyBreaky
                     s.Connection = myConnection;
                     myConnection.Open();
                     s.ExecuteNonQuery();
+                    myConnection.Close();
                 }
             }
             Startscreen start = new Startscreen();

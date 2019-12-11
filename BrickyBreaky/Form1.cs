@@ -12,7 +12,11 @@ namespace BrickyBreaky
 {
     public partial class Form1 : Form
     {
+<<<<<<< HEAD
         private int level = 1;
+=======
+        public int level = 9;
+>>>>>>> d074e378cd072d0e37cf07c10385ef487acb3179
 
         public List<PictureBox> CurrentBricks = new List<PictureBox>();
 
@@ -218,7 +222,16 @@ namespace BrickyBreaky
             //}
             if (ball.Bounds.IntersectsWith(paddle.Bounds))
             {
+<<<<<<< HEAD
                 //if (ball.Location.X > paddle.Location.Y)
+=======
+
+                ///if the ball is left of center go left
+                ///
+
+                
+                //if (ball.Left > paddle.Left)
+>>>>>>> d074e378cd072d0e37cf07c10385ef487acb3179
                 //{
                 //    speedY += 2;
                 //    speedX += 2;
@@ -235,8 +248,18 @@ namespace BrickyBreaky
                 //    speedY = -speedY;
                 //}
 
-                speedY += 2;
-                speedX += 2;
+               // speedY += 2;
+               // speedX += 2;
+                /*
+                if(speedX <= 20)
+                {
+                    speedX = 20;
+                }
+                if(speedY <= 20)
+                {
+                    speedY = 20;
+                }
+                */
 
                 speedY = -speedY;
             }

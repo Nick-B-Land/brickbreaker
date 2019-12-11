@@ -26,7 +26,8 @@ namespace BrickyBreaky
 
         private void exitButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            //.Close();
+            Application.Exit();
         }
 
         private void leaderboardButton_Click(object sender, EventArgs e)

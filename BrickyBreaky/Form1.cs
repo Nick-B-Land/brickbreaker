@@ -17,12 +17,24 @@ namespace BrickyBreaky
         public List<PictureBox> CurrentBricks = new List<PictureBox>();
 
         // speed for ball
-        public int speedX = 4;
+        public int speedX = 10;
 
-        public int speedY = 4;
+        public int speedY = 10;
 
         // points counter
         public int points = 0;
+
+        public int Level
+        {
+            get { return level; }
+            set { level = value; }
+        }
+
+        public int Points
+        {
+            get { return points; }
+            set { points = value; }
+        }
 
         public Form1()
         {
@@ -33,23 +45,87 @@ namespace BrickyBreaky
             //this.FormBorderStyle = FormBorderStyle.None; //removes border
             //this.TopMost = true; // brings the form to the front
             //this.Bounds = Screen.PrimaryScreen.Bounds;
-            paddle.Top = board.Bottom - (board.Bottom / 10); // setting the position of the paddle
+            //paddle.Top = board.Bottom - (board.Bottom / 10); // setting the position of the paddle
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (level == 1)
+            lvlLbl.Text = level.ToString();
+            scoreLbl.Text = points.ToString();
+            speedX = level * 10;
+            speedY = level * 10;
+
+            int startPoint = 150;
+            int start2 = 150;
+            int start3 = 150;
+            int start4 = 150;
+            int start5 = 150;
+            for (int i = 1; i <= level * 5; ++i)
             {
-                for (int i = 0; i < 10; ++i)
+                if (i < 10)
                 {
-                    if (i == 0)
-                    {
-                        PictureBox brick0 = new PictureBox();
-                        brick0.BackColor = Color.Gray;
-                        brick0.Location = new Point(100, 50);
-                        CurrentBricks.Add(brick0);
-                        board.Controls.Add(brick0);
-                    }
+                    PictureBox brick = new PictureBox();
+                    brick.BackColor = Color.Gray;
+                    brick.Location = new Point(startPoint, 50);
+                    Size temp = brick.Size;
+                    temp.Width = 50;
+                    temp.Height = 25;
+                    brick.Size = temp;
+                    CurrentBricks.Add(brick);
+                    board.Controls.Add(brick);
+                    startPoint += temp.Width + 2;
+                }
+                else if (i > 10 && i < 20)
+                {
+                    PictureBox brick = new PictureBox();
+                    brick.BackColor = Color.Gray;
+                    brick.Location = new Point(start2, 102);
+                    Size temp = brick.Size;
+                    temp.Width = 50;
+                    temp.Height = 25;
+                    brick.Size = temp;
+                    CurrentBricks.Add(brick);
+                    board.Controls.Add(brick);
+                    start2 += temp.Width + 2;
+                }
+                else if (i > 20 && i < 30)
+                {
+                    PictureBox brick = new PictureBox();
+                    brick.BackColor = Color.Gray;
+                    brick.Location = new Point(start3, 152);
+                    Size temp = brick.Size;
+                    temp.Width = 50;
+                    temp.Height = 25;
+                    brick.Size = temp;
+                    CurrentBricks.Add(brick);
+                    board.Controls.Add(brick);
+                    start3 += temp.Width + 2;
+                }
+                else if (i > 30 && i < 40)
+                {
+                    PictureBox brick = new PictureBox();
+                    brick.BackColor = Color.Gray;
+                    brick.Location = new Point(start4, 202);
+                    Size temp = brick.Size;
+                    temp.Width = 50;
+                    temp.Height = 25;
+                    brick.Size = temp;
+                    CurrentBricks.Add(brick);
+                    board.Controls.Add(brick);
+                    start4 += temp.Width + 2;
+                }
+                else if (i > 40 && i < 50)
+                {
+                    PictureBox brick = new PictureBox();
+                    brick.BackColor = Color.Gray;
+                    brick.Location = new Point(start5, 252);
+                    Size temp = brick.Size;
+                    temp.Width = 50;
+                    temp.Height = 25;
+                    brick.Size = temp;
+                    CurrentBricks.Add(brick);
+                    board.Controls.Add(brick);
+                    start5 += temp.Width + 2;
                 }
             }
         }
@@ -68,17 +144,34 @@ namespace BrickyBreaky
             {
                 if (b.Bounds.IntersectsWith(ball.Bounds))
                 {
+                    CurrentBricks.Remove(b);
                     board.Controls.Remove(b);
                     speedX = -speedX;
                     speedY = -speedY;
+                    points += 10;
+                    scoreLbl.Text = points.ToString();
+                    LevelComplete();
+                    break;
                 }
+            }
+        }
+
+        public void LevelComplete()
+        {
+            if (CurrentBricks.Count == 0)
+            {
+                Form1 f = new Form1();
+                f.level = level + 1;
+                f.points = points;
+                f.Show();
+                this.Hide();
             }
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
             BrickDelete();
-            paddle.Left = Cursor.Position.X - (paddle.Width / 2);
+            //paddle.Left = Cursor.Position.X - (paddle.Width / 2);
 
             ball.Left += speedX;
             ball.Top += speedY;
@@ -93,11 +186,28 @@ namespace BrickyBreaky
             //}
             if (ball.Bounds.IntersectsWith(paddle.Bounds))
             {
+                //if (ball.Left > paddle.Left)
+                //{
+                //    speedY += 2;
+                //    //speedX += 2;
+
+                //    speedY = -speedY;
+                //    speedX += 4;
+                //}
+
+                //if (ball.Right < paddle.Right)
+                //{
+                //    speedY += 2;
+                //    //speedX += 2;
+
+                //    speedY = -speedY;
+                //    speedX -= 4;
+                //}
+
                 speedY += 2;
                 speedX += 2;
 
                 speedY = -speedY;
-                points += 1;
             }
             if (ball.Left <= board.Left)
             {
@@ -111,10 +221,40 @@ namespace BrickyBreaky
             {
                 speedY = -speedY;
             }
+
+            if (ball.Top <= 45)
+            {
+                speedY = -speedY;
+            }
+
             if (ball.Bottom >= board.Bottom)
             {
                 timer1.Enabled = false; // stop the game
             }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    if (paddle.Left > board.Left)
+                    {
+                        paddle.Left = paddle.Left - 50;
+                    }
+                    break;
+
+                case Keys.Right:
+                    if (paddle.Right < board.Right)
+                    {
+                        paddle.Left = paddle.Left + 50;
+                    }
+                    break;
+            }
+        }
+
+        private void scoreNameLbl_Click(object sender, EventArgs e)
+        {
         }
     }
 }

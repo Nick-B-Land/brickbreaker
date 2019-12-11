@@ -34,6 +34,7 @@ namespace BrickyBreaky
         {
             var leaderboard = new Leaderboard();
             leaderboard.Show();
+            this.Hide();
         }
 
         private void Startscreen_Load(object sender, EventArgs e)

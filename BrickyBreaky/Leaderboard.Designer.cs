@@ -33,6 +33,7 @@
             this.leaderboardDS = new System.Windows.Forms.BindingSource(this.components);
             this.leaderboardDBDataSet1 = new BrickyBreaky.LeaderboardDBDataSet1();
             this.playerTableAdapter = new BrickyBreaky.LeaderboardDBDataSet1TableAdapters.PlayerTableAdapter();
+            this.backToMainButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.leaderboardDS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leaderboardDBDataSet1)).BeginInit();
             this.SuspendLayout();
@@ -40,9 +41,11 @@
             // leaderBoardBox
             // 
             this.leaderBoardBox.FormattingEnabled = true;
-            this.leaderBoardBox.Location = new System.Drawing.Point(12, 12);
+            this.leaderBoardBox.ItemHeight = 25;
+            this.leaderBoardBox.Location = new System.Drawing.Point(24, 23);
+            this.leaderBoardBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.leaderBoardBox.Name = "leaderBoardBox";
-            this.leaderBoardBox.Size = new System.Drawing.Size(776, 329);
+            this.leaderBoardBox.Size = new System.Drawing.Size(1548, 629);
             this.leaderBoardBox.TabIndex = 0;
             this.leaderBoardBox.SelectedIndexChanged += new System.EventHandler(this.leaderBoardBox_SelectedIndexChanged);
             // 
@@ -60,12 +63,24 @@
             // 
             this.playerTableAdapter.ClearBeforeFill = true;
             // 
+            // backToMainButton
+            // 
+            this.backToMainButton.Location = new System.Drawing.Point(512, 706);
+            this.backToMainButton.Name = "backToMainButton";
+            this.backToMainButton.Size = new System.Drawing.Size(519, 113);
+            this.backToMainButton.TabIndex = 1;
+            this.backToMainButton.Text = "Back To Main Menu";
+            this.backToMainButton.UseVisualStyleBackColor = true;
+            this.backToMainButton.Click += new System.EventHandler(this.backToMainButton_Click);
+            // 
             // Leaderboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1600, 865);
+            this.Controls.Add(this.backToMainButton);
             this.Controls.Add(this.leaderBoardBox);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "Leaderboard";
             this.Text = "Leaderboard";
             this.Load += new System.EventHandler(this.Leaderboard_Load);
@@ -81,5 +96,6 @@
         private System.Windows.Forms.BindingSource leaderboardDS;
         private LeaderboardDBDataSet1 leaderboardDBDataSet1;
         private LeaderboardDBDataSet1TableAdapters.PlayerTableAdapter playerTableAdapter;
+        private System.Windows.Forms.Button backToMainButton;
     }
 }

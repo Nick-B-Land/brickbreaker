@@ -12,7 +12,7 @@ namespace BrickyBreaky
 {
     public partial class Form1 : Form
     {
-        private int level = 6;
+        private int level = 1;
 
         public List<PictureBox> CurrentBricks = new List<PictureBox>();
 
@@ -60,6 +60,7 @@ namespace BrickyBreaky
             int start3 = 150;
             int start4 = 150;
             int start5 = 150;
+            int start6 = 150;
             for (int i = 1; i <= level * 5; ++i)
             {
                 if (i < 10)
@@ -115,6 +116,19 @@ namespace BrickyBreaky
                     start4 += temp.Width + 2;
                 }
                 else if (i > 40 && i < 50)
+                {
+                    PictureBox brick = new PictureBox();
+                    brick.BackColor = Color.Gray;
+                    brick.Location = new Point(start5, 252);
+                    Size temp = brick.Size;
+                    temp.Width = 50;
+                    temp.Height = 25;
+                    brick.Size = temp;
+                    CurrentBricks.Add(brick);
+                    board.Controls.Add(brick);
+                    start5 += temp.Width + 2;
+                }
+                else if(i > 50)
                 {
                     PictureBox brick = new PictureBox();
                     brick.BackColor = Color.Gray;
@@ -184,6 +198,16 @@ namespace BrickyBreaky
             ball.Left += speedX;
             ball.Top += speedY;
 
+            if(speedX >= 50)
+            {
+                speedX = 40;
+            }
+
+            if (speedY >= 50)
+            {
+                speedY = 40;
+            }
+
             //if (ball.Bottom >= paddle.Top && ball.Bottom <= paddle.Bottom && ball.Left >= paddle.Left && ball.Right <= paddle.Right)
             //{
             //speedY += 2;
@@ -194,22 +218,21 @@ namespace BrickyBreaky
             //}
             if (ball.Bounds.IntersectsWith(paddle.Bounds))
             {
-                //if (ball.Left > paddle.Left)
+                //if (ball.Location.X > paddle.Location.Y)
                 //{
                 //    speedY += 2;
-                //    //speedX += 2;
+                //    speedX += 2;
 
                 //    speedY = -speedY;
-                //    speedX += 4;
+                //    speedX = -speedX;
                 //}
 
-                //if (ball.Right < paddle.Right)
+                //if (ball.Location.X < paddle.Location.X)
                 //{
                 //    speedY += 2;
-                //    //speedX += 2;
+                //    speedX += 2;
 
                 //    speedY = -speedY;
-                //    speedX -= 4;
                 //}
 
                 speedY += 2;

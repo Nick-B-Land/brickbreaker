@@ -57,18 +57,18 @@ namespace BrickyBreaky
             tBall.Height = 25;
             ball.Size = tBall;
             ball.BackColor = Color.Red;
-            ball.Location = new Point(296, 347);
+            ball.Location = new Point(150, 350);
             board.Controls.Add(ball);
             lvlLbl.Text = level.ToString();
             scoreLbl.Text = points.ToString();
             //speedX = level * 2;
             //speedY = level * 2;
 
-            int startPoint = 225;
+            int startPoint = 150;
             int start2 = 150;
-            int start3 = 225;
+            int start3 = 150;
             int start4 = 150;
-            int start5 = 225;
+            int start5 = 150;
             int start6 = 150;
             for (int i = 1; i <= level * 5; ++i)
             {
@@ -241,16 +241,25 @@ namespace BrickyBreaky
 
                 //if (ball.Location.X < paddle.Location.X)
                 //{
-                //    speedY += 2;
-                //    speedX += 2;
+                //    speedY += 1;
+                //    speedX += 1;
 
                 //    speedY = -speedY;
+                //    speedX = -speedX;
                 //}
+                //else if (ball.Location.X > paddle.Location.X)
+                //{
+                //    speedY += 1;
+                //    speedX += 1;
 
-                speedY += 1;
-                speedX += 1;
-                speedY = -speedY;
-
+                //    speedY = -speedY;
+                //    speedX = -speedX;
+                //}
+                
+                    speedY += 1;
+                    speedX += 1;
+                    speedY = -speedY;
+                
                 /*
                 if(speedX <= 20)
                 {

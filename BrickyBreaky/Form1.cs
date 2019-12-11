@@ -12,7 +12,7 @@ namespace BrickyBreaky
 {
     public partial class Form1 : Form
     {
-        private int level = 1;
+        private int level = 6;
 
         public List<PictureBox> CurrentBricks = new List<PictureBox>();
 
@@ -40,7 +40,7 @@ namespace BrickyBreaky
         {
             InitializeComponent();
             timer1.Enabled = true;
-            Cursor.Hide();
+            //Cursor.Hide();
 
             //this.FormBorderStyle = FormBorderStyle.None; //removes border
             //this.TopMost = true; // brings the form to the front
@@ -52,8 +52,8 @@ namespace BrickyBreaky
         {
             lvlLbl.Text = level.ToString();
             scoreLbl.Text = points.ToString();
-            speedX = level * 10;
-            speedY = level * 10;
+            //speedX = level * 2;
+            //speedY = level * 2;
 
             int startPoint = 150;
             int start2 = 150;
@@ -168,6 +168,14 @@ namespace BrickyBreaky
             }
         }
 
+        public void EndGame()
+        {
+            Endscreen e = new Endscreen();
+            e.score = points;
+            e.Show();
+            this.Hide();
+        }
+
         private void Timer1_Tick(object sender, EventArgs e)
         {
             BrickDelete();
@@ -230,6 +238,7 @@ namespace BrickyBreaky
             if (ball.Bottom >= board.Bottom)
             {
                 timer1.Enabled = false; // stop the game
+                EndGame();
             }
         }
 

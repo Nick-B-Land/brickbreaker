@@ -13,14 +13,15 @@ namespace BrickyBreaky
     public partial class Startscreen : Form
     {
         public Startscreen()
-        {            
+        {
             InitializeComponent();
         }
 
         private void startButton_Click(object sender, EventArgs e)
-        {            
+        {
             var startGame = new Form1();
             startGame.Show();
+            this.Hide();
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -32,6 +33,10 @@ namespace BrickyBreaky
         {
             var leaderboard = new Leaderboard();
             leaderboard.Show();
+        }
+
+        private void Startscreen_Load(object sender, EventArgs e)
+        {
         }
     }
 }

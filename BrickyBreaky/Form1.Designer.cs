@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.board = new System.Windows.Forms.Panel();
             this.scoreLbl = new System.Windows.Forms.Label();
+            this.lvlNameLbl = new System.Windows.Forms.Label();
             this.ball = new System.Windows.Forms.PictureBox();
+            this.lvlLbl = new System.Windows.Forms.Label();
             this.paddle = new System.Windows.Forms.PictureBox();
             this.scoreNameLbl = new System.Windows.Forms.Label();
-            this.lvlNameLbl = new System.Windows.Forms.Label();
-            this.lvlLbl = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.board.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ball)).BeginInit();
@@ -67,14 +67,34 @@
             this.scoreLbl.TabIndex = 5;
             this.scoreLbl.Text = "label1";
             // 
+            // lvlNameLbl
+            // 
+            this.lvlNameLbl.AutoSize = true;
+            this.lvlNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvlNameLbl.Location = new System.Drawing.Point(3, 9);
+            this.lvlNameLbl.Name = "lvlNameLbl";
+            this.lvlNameLbl.Size = new System.Drawing.Size(65, 24);
+            this.lvlNameLbl.TabIndex = 2;
+            this.lvlNameLbl.Text = "Level: ";
+            // 
             // ball
             // 
             this.ball.BackColor = System.Drawing.Color.Red;
-            this.ball.Location = new System.Drawing.Point(303, 437);
+            this.ball.Location = new System.Drawing.Point(222, 282);
             this.ball.Name = "ball";
             this.ball.Size = new System.Drawing.Size(20, 20);
             this.ball.TabIndex = 1;
             this.ball.TabStop = false;
+            // 
+            // lvlLbl
+            // 
+            this.lvlLbl.AutoSize = true;
+            this.lvlLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvlLbl.Location = new System.Drawing.Point(74, 9);
+            this.lvlLbl.Name = "lvlLbl";
+            this.lvlLbl.Size = new System.Drawing.Size(60, 24);
+            this.lvlLbl.TabIndex = 4;
+            this.lvlLbl.Text = "label1";
             // 
             // paddle
             // 
@@ -95,26 +115,6 @@
             this.scoreNameLbl.TabIndex = 3;
             this.scoreNameLbl.Text = "Score: ";
             this.scoreNameLbl.Click += new System.EventHandler(this.scoreNameLbl_Click);
-            // 
-            // lvlNameLbl
-            // 
-            this.lvlNameLbl.AutoSize = true;
-            this.lvlNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lvlNameLbl.Location = new System.Drawing.Point(3, 9);
-            this.lvlNameLbl.Name = "lvlNameLbl";
-            this.lvlNameLbl.Size = new System.Drawing.Size(65, 24);
-            this.lvlNameLbl.TabIndex = 2;
-            this.lvlNameLbl.Text = "Level: ";
-            // 
-            // lvlLbl
-            // 
-            this.lvlLbl.AutoSize = true;
-            this.lvlLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lvlLbl.Location = new System.Drawing.Point(74, 9);
-            this.lvlLbl.Name = "lvlLbl";
-            this.lvlLbl.Size = new System.Drawing.Size(60, 24);
-            this.lvlLbl.TabIndex = 4;
-            this.lvlLbl.Text = "label1";
             // 
             // timer1
             // 

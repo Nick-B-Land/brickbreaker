@@ -10,14 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace BrickyBreaky
 {
     public partial class Endscreen : Form
     {
         public int score;
-        LeaderboardDBDataSet db = new LeaderboardDBDataSet();
-        string dbConnection;
+        public bool won;
+        private LeaderboardDBDataSet db = new LeaderboardDBDataSet();
+        private string dbConnection;
 
         public Endscreen()
         {
@@ -30,11 +30,21 @@ namespace BrickyBreaky
             set { score = value; }
         }
 
+        public bool beatGame
+        {
+            get { return beatGame; }
+            set { beatGame = value; }
+        }
+
         private void Endscreen_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'leaderboardDBDataSet1.Player' table. You can move, or remove it, as needed.
             this.playerTableAdapter.Fill(this.leaderboardDBDataSet1.Player);
             scoreLbl.Text = score.ToString();
+            if (won == true)
+            {
+                gameOverLbl.Text = "You beat the game!";
+            }
         }
 
         private void exitBtn_Click(object sender, EventArgs e)
@@ -65,7 +75,6 @@ namespace BrickyBreaky
             Startscreen start = new Startscreen();
             start.Show();
             this.Close();
-
         }
     }
 }

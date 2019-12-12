@@ -12,7 +12,6 @@ namespace BrickyBreaky
 {
     public partial class Form1 : Form
     {
-
         private int level = 1;
         public PictureBox ball = new PictureBox();
 
@@ -57,7 +56,7 @@ namespace BrickyBreaky
             tBall.Height = 25;
             ball.Size = tBall;
             ball.BackColor = Color.Red;
-            ball.Location = new Point(150, 350);
+            ball.Location = new Point(190, 350);
             board.Controls.Add(ball);
             lvlLbl.Text = level.ToString();
             scoreLbl.Text = points.ToString();
@@ -137,7 +136,7 @@ namespace BrickyBreaky
                     board.Controls.Add(brick);
                     start5 += temp.Width + 2;
                 }
-                else if(i > 50 && i < 60)
+                else if (i > 50 && i < 60)
                 {
                     PictureBox brick = new PictureBox();
                     brick.BackColor = Color.Gray;
@@ -183,12 +182,14 @@ namespace BrickyBreaky
         {
             if (CurrentBricks.Count == 0)
             {
-                if(level + 1 == 16)
+                if (level + 1 == 16)
                 {
                     Endscreen e = new Endscreen();
                     e.score = points;
+                    e.beatGame = true;
                     e.Show();
                     this.Close();
+                    return;
                 }
                 Form1 f = new Form1();
                 f.level = level + 1;
@@ -209,27 +210,40 @@ namespace BrickyBreaky
         private void Timer1_Tick(object sender, EventArgs e)
         {
             BrickDelete();
-            //paddle.Left = Cursor.Position.X - (paddle.Width / 2);
 
             ball.Left += speedX;
             ball.Top += speedY;
 
-            //if (ball.Bottom >= paddle.Top && ball.Bottom <= paddle.Bottom && ball.Left >= paddle.Left && ball.Right <= paddle.Right)
-            //{
-            //speedY += 2;
-            //speedX += 2;
-
-            //speedY = -speedY;
-            //points += 1;
-            //}
             if (ball.Bounds.IntersectsWith(paddle.Bounds))
             {
+                int paddleMiddle = paddle.Width / 2;
                 if (speedX >= 20)
                 {
                     speedX = 15;
                     speedY = 15;
                 }
-                //if (ball.Location.X > paddle.Location.Y) 
+
+                if (ball.Location.X < paddle.Location.X + (paddleMiddle + 25))
+                {
+                    speedY += 1;
+                    speedX += 3;
+                    speedY = -speedY;
+                    speedX = +speedX;
+                }
+                else if (ball.Location.X > paddle.Location.X + (paddleMiddle - 25))
+                {
+                    speedY += 1;
+                    speedX += 1;
+                    speedY = -speedY;
+                    speedX = -speedX;
+                }
+                else
+                {
+                    speedY += 1;
+                    speedX += 1;
+                    speedY = -speedY;
+                }
+                //if (ball.Location.X > paddle.Location.Y)
                 //if (ball.Left > paddle.Left)
                 //{
                 //    speedY += 2;
@@ -255,11 +269,11 @@ namespace BrickyBreaky
                 //    speedY = -speedY;
                 //    speedX = -speedX;
                 //}
-                
-                    speedY += 1;
-                    speedX += 1;
-                    speedY = -speedY;
-                
+
+                //speedY += 1;
+                //speedX += 1;
+                //speedY = -speedY;
+
                 /*
                 if(speedX <= 20)
                 {
@@ -291,7 +305,6 @@ namespace BrickyBreaky
 
             if (ball.Location.Y >= 550)
             {
-            
                 timer1.Enabled = false; // stop the game
                 EndGame();
             }
@@ -323,7 +336,6 @@ namespace BrickyBreaky
 
         private void LvlNameLbl_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

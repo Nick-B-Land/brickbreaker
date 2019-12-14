@@ -17,6 +17,7 @@ namespace BrickyBreaky
             InitializeComponent();
         }
 
+        //starts the game
         private void startButton_Click(object sender, EventArgs e)
         {
             var startGame = new Form1();
@@ -24,12 +25,13 @@ namespace BrickyBreaky
             this.Hide();
         }
 
+        //close application
         private void exitButton_Click(object sender, EventArgs e)
         {
-            //.Close();
             Application.Exit();
         }
 
+        //load leaderboard screen
         private void leaderboardButton_Click(object sender, EventArgs e)
         {
             var leaderboard = new Leaderboard();

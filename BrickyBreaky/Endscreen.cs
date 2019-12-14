@@ -14,7 +14,9 @@ namespace BrickyBreaky
 {
     public partial class Endscreen : Form
     {
+        //backing fields needed for displaying data
         public int score;
+
         public bool won;
         private LeaderboardDBDataSet db = new LeaderboardDBDataSet();
         private string dbConnection;
@@ -32,13 +34,14 @@ namespace BrickyBreaky
 
         public bool beatGame
         {
-            get { return beatGame; }
-            set { beatGame = value; }
+            get { return won; }
+            set { won = value; }
         }
 
+        //loads the screen and sets form details
+        //loads database
         private void Endscreen_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'leaderboardDBDataSet1.Player' table. You can move, or remove it, as needed.
             this.playerTableAdapter.Fill(this.leaderboardDBDataSet1.Player);
             scoreLbl.Text = score.ToString();
             if (won == true)
@@ -47,6 +50,7 @@ namespace BrickyBreaky
             }
         }
 
+        //go back to main menu
         private void exitBtn_Click(object sender, EventArgs e)
         {
             var s = new Startscreen();
@@ -54,6 +58,8 @@ namespace BrickyBreaky
             this.Hide();
         }
 
+        //updates the database with user supplied fields
+        //then loads start screen
         private void submitBtn_Click(object sender, EventArgs e)
         {
             var name = nameTxtBx.Text;

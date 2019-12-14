@@ -12,45 +12,36 @@ namespace BrickyBreaky
 {
     public partial class Form1 : Form
     {
-        private int level = 1;
+        //level of the game
+        public int level = 1;
+
+        //main "ball" object
         public PictureBox ball = new PictureBox();
 
+        //list to track the current bricks
         public List<PictureBox> CurrentBricks = new List<PictureBox>();
 
-        // speed for ball
-        public int speedX = 10;
+        //speed for ball
+        public int speedX = 7;
 
-        public int speedY = 10;
+        public int speedY = 7;
 
-        // points counter
+        //tracks score
         public int points = 0;
 
-        public int Level
-        {
-            get { return level; }
-            set { level = value; }
-        }
+        public int Level { get; set; }
 
-        public int Points
-        {
-            get { return points; }
-            set { points = value; }
-        }
+        public int Points { get; set; }
 
         public Form1()
         {
             InitializeComponent();
             timer1.Enabled = true;
-            //Cursor.Hide();
-
-            //this.FormBorderStyle = FormBorderStyle.None; //removes border
-            //this.TopMost = true; // brings the form to the front
-            //this.Bounds = Screen.PrimaryScreen.Bounds;
-            //paddle.Top = board.Bottom - (board.Bottom / 10); // setting the position of the paddle
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //sets ball size and location and adds it to the board
             Size tBall = ball.Size;
             tBall.Width = 25;
             tBall.Height = 25;
@@ -60,18 +51,20 @@ namespace BrickyBreaky
             board.Controls.Add(ball);
             lvlLbl.Text = level.ToString();
             scoreLbl.Text = points.ToString();
-            //speedX = level * 2;
-            //speedY = level * 2;
 
-            int startPoint = 150;
-            int start2 = 150;
-            int start3 = 150;
-            int start4 = 150;
-            int start5 = 150;
-            int start6 = 150;
+            //starting points for bricks to render at (x values)
+            int startPoint = 130;
+            int start2 = 130;
+            int start3 = 130;
+            int start4 = 130;
+            int start5 = 130;
+            int start6 = 130;
+
+            //renders the bricks based on the level
+            //render in stacking rows as the level increases
             for (int i = 1; i <= level * 5; ++i)
             {
-                if (i < 10)
+                if (i <= 10)
                 {
                     PictureBox brick = new PictureBox();
                     brick.BackColor = Color.Gray;
@@ -84,7 +77,7 @@ namespace BrickyBreaky
                     board.Controls.Add(brick);
                     startPoint += temp.Width + 2;
                 }
-                else if (i > 10 && i < 20)
+                else if (i > 10 && i <= 20)
                 {
                     PictureBox brick = new PictureBox();
                     brick.BackColor = Color.Gray;
@@ -97,7 +90,7 @@ namespace BrickyBreaky
                     board.Controls.Add(brick);
                     start2 += temp.Width + 2;
                 }
-                else if (i > 20 && i < 30)
+                else if (i > 20 && i <= 30)
                 {
                     PictureBox brick = new PictureBox();
                     brick.BackColor = Color.Gray;
@@ -110,7 +103,7 @@ namespace BrickyBreaky
                     board.Controls.Add(brick);
                     start3 += temp.Width + 2;
                 }
-                else if (i > 30 && i < 40)
+                else if (i > 30 && i <= 40)
                 {
                     PictureBox brick = new PictureBox();
                     brick.BackColor = Color.Gray;
@@ -123,7 +116,7 @@ namespace BrickyBreaky
                     board.Controls.Add(brick);
                     start4 += temp.Width + 2;
                 }
-                else if (i > 40 && i < 50)
+                else if (i > 40 && i <= 50)
                 {
                     PictureBox brick = new PictureBox();
                     brick.BackColor = Color.Gray;
@@ -136,11 +129,11 @@ namespace BrickyBreaky
                     board.Controls.Add(brick);
                     start5 += temp.Width + 2;
                 }
-                else if (i > 50 && i < 60)
+                else if (i > 50 && i <= 60)
                 {
                     PictureBox brick = new PictureBox();
                     brick.BackColor = Color.Gray;
-                    brick.Location = new Point(start6, 252);
+                    brick.Location = new Point(start6, 302);
                     Size temp = brick.Size;
                     temp.Width = 50;
                     temp.Height = 25;
@@ -152,14 +145,8 @@ namespace BrickyBreaky
             }
         }
 
-        private void Board_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                this.Close();
-            }
-        }
-
+        //function that checks if a brick should be deleted or not
+        //updates currentBricks if so
         public void BrickDelete()
         {
             foreach (var b in CurrentBricks)
@@ -168,7 +155,6 @@ namespace BrickyBreaky
                 {
                     CurrentBricks.Remove(b);
                     board.Controls.Remove(b);
-                    //speedX = -speedX;
                     speedY = -speedY;
                     points += 10;
                     scoreLbl.Text = points.ToString();
@@ -178,6 +164,8 @@ namespace BrickyBreaky
             }
         }
 
+        //function to check if level is complete
+        //loads a new level if it is
         public void LevelComplete()
         {
             if (CurrentBricks.Count == 0)
@@ -199,6 +187,7 @@ namespace BrickyBreaky
             }
         }
 
+        //function to load the end game screen
         public void EndGame()
         {
             Endscreen e = new Endscreen();
@@ -207,6 +196,8 @@ namespace BrickyBreaky
             this.Close();
         }
 
+        //tick timer for moving ball and updating speed
+        //also where functions are called, serves as the event to trigger them
         private void Timer1_Tick(object sender, EventArgs e)
         {
             BrickDelete();
@@ -214,13 +205,16 @@ namespace BrickyBreaky
             ball.Left += speedX;
             ball.Top += speedY;
 
+            //check if ball has it paddle, and then update ball speed/direction
+            //this part can be potentially a little buggy
+            //couldn't figure out why, works 95% of the time though
             if (ball.Bounds.IntersectsWith(paddle.Bounds))
             {
                 int paddleMiddle = paddle.Width / 2;
-                if (speedX >= 20)
+                if (speedX > 20 || speedX < -20)
                 {
-                    speedX = 15;
-                    speedY = 15;
+                    speedX = 8;
+                    speedY = 8;
                 }
 
                 if (ball.Location.X < paddle.Location.X + (paddleMiddle + 25))
@@ -228,14 +222,12 @@ namespace BrickyBreaky
                     speedY += 1;
                     speedX += 3;
                     speedY = -speedY;
-                    speedX = +speedX;
                 }
                 else if (ball.Location.X > paddle.Location.X + (paddleMiddle - 25))
                 {
                     speedY += 1;
-                    speedX += 1;
+                    speedX += 3;
                     speedY = -speedY;
-                    speedX = -speedX;
                 }
                 else
                 {
@@ -243,48 +235,9 @@ namespace BrickyBreaky
                     speedX += 1;
                     speedY = -speedY;
                 }
-                //if (ball.Location.X > paddle.Location.Y)
-                //if (ball.Left > paddle.Left)
-                //{
-                //    speedY += 2;
-                //    speedX += 2;
-
-                //    speedY = -speedY;
-                //    speedX = -speedX;
-                //}
-
-                //if (ball.Location.X < paddle.Location.X)
-                //{
-                //    speedY += 1;
-                //    speedX += 1;
-
-                //    speedY = -speedY;
-                //    speedX = -speedX;
-                //}
-                //else if (ball.Location.X > paddle.Location.X)
-                //{
-                //    speedY += 1;
-                //    speedX += 1;
-
-                //    speedY = -speedY;
-                //    speedX = -speedX;
-                //}
-
-                //speedY += 1;
-                //speedX += 1;
-                //speedY = -speedY;
-
-                /*
-                if(speedX <= 20)
-                {
-                    speedX = 20;
-                }
-                if(speedY <= 20)
-                {
-                    speedY = 20;
-                }
-                */
             }
+
+            //bounds checking to reverse ball direction
             if (ball.Left <= board.Left)
             {
                 speedX = -speedX;
@@ -298,18 +251,14 @@ namespace BrickyBreaky
                 speedY = -speedY;
             }
 
-            //if (ball.Top <= 45)
-            //{
-            //    speedY = -speedY;
-            //}
-
-            if (ball.Location.Y >= 550)
+            if (ball.Location.Y >= 500)
             {
                 timer1.Enabled = false; // stop the game
                 EndGame();
             }
         }
 
+        //bind left and right keys to moving the paddle
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -317,25 +266,17 @@ namespace BrickyBreaky
                 case Keys.Left:
                     if (paddle.Left > board.Left)
                     {
-                        paddle.Left = paddle.Left - 50;
+                        paddle.Left = paddle.Left - 65;
                     }
                     break;
 
                 case Keys.Right:
                     if (paddle.Right < board.Right)
                     {
-                        paddle.Left = paddle.Left + 50;
+                        paddle.Left = paddle.Left + 65;
                     }
                     break;
             }
-        }
-
-        private void scoreNameLbl_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void LvlNameLbl_Click(object sender, EventArgs e)
-        {
         }
     }
 }
